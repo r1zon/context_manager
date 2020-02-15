@@ -35,22 +35,21 @@ def main():
         next_step = input('Нажмите c, чтобы запустить программу. '
                           'Для выхода нажмите q.\n')
         if next_step == 'c':
-            if __name__ == '__main__':
-                with my_open('doc_context.txt') as file:
-                    line = file.readline().strip()
-                    doc_text = requests.get(line)
-                    url = 'https://stepic.org/media/attachments/course67/3.6.3/'
-                    new_url = url + str(doc_text.text)
-                    count_requests = 0
-                    while 'We ' not in new_url:
-                        text = requests.get(new_url)
-                        new_url = url + str(text.text)
-                        count_requests += 1
-                    print('*'*20)
-                    print(f'Текст файла: \n'
-                          f'{text.text}')
-                    print('*'*20)
-                    print(f'Номер последнего файла: {count_requests}')
+            with my_open('doc_context.txt') as file:
+                line = file.readline().strip()
+                doc_text = requests.get(line)
+                url = 'https://stepic.org/media/attachments/course67/3.6.3/'
+                new_url = url + str(doc_text.text)
+                count_requests = 0
+                while 'We ' not in new_url:
+                    text = requests.get(new_url)
+                    new_url = url + str(text.text)
+                    count_requests += 1
+                print('*'*20)
+                print(f'Текст файла: \n'
+                      f'{text.text}')
+                print('*'*20)
+                print(f'Номер последнего файла: {count_requests}')
         elif next_step == 'q':
             break
 main()
